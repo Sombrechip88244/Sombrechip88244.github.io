@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import ProjectsGrid from '../components/ProjectsGrid.astro'
+import ProjectCard from '../components/ProjectCard.astro'
+import { getCollection } from 'astro:content'
 
-const token = import.meta.env.PUBLIC_GITHUB_TOKEN
+const [entry] = await getCollection('projects')
+const projects = entry.data
 ---
 
 <BaseLayout
@@ -15,6 +17,10 @@ const token = import.meta.env.PUBLIC_GITHUB_TOKEN
       A collection of things I've built — tools, experiments, and side projects.
     </p>
 
-    <ProjectsGrid token={token} />
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {projects.map((project: { title: string; description: string; url: string; tags: string[]; repo?: string }) => (
+        <ProjectCard {...project} />
+      ))}
+    </div>
   </section>
 </BaseLayout>
