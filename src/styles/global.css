@@ -3,13 +3,13 @@
 
 @layer base {
   :root {
-    --color-bg: #0d1117;
-    --color-surface: #161b22;
-    --color-text: #c9d1d9;
-    --color-text-muted: #8b949e;
-    --color-accent: #58a6ff;
-    --color-accent-hover: #79b8ff;
-    --color-border: #30363d;
+    --color-bg: #ffffff;
+    --color-surface: #f6f8fa;
+    --color-text: #1f2328;
+    --color-text-muted: #656d76;
+    --color-accent: #0969da;
+    --color-accent-hover: #0550ae;
+    --color-border: #d0d7de;
   }
 
   html {
