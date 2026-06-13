@@ -11,6 +11,15 @@
     --color-accent-hover: #0550ae;
     --color-border: #d0d7de;
   }
+  .dark {
+    --color-bg: #0d1117;
+    --color-surface: #161b22;
+    --color-text: #c9d1d9;
+    --color-text-muted: #8b949e;
+    --color-accent: #58a6ff;
+    --color-accent-hover: #79b8ff;
+    --color-border: #30363d;
+  }
 
   html {
     scroll-behavior: smooth;

@@ -44,6 +44,14 @@ const { Content } = await render(post)
       <Content />
     </div>
 
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      '@type': 'BlogPosting',
+      headline: post.data.title,
+      description: post.data.description,
+      datePublished: post.data.date.toISOString(),
+      author: { '@type': 'Person', name: 'Oliver Fildes' },
+    })} />
+
     <div class="mt-12 pt-6 border-t border-[var(--color-border)]">
       <a href="/blog" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)]">
         ← Back to blog

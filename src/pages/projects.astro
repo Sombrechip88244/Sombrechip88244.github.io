@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import ProjectCard from '../components/ProjectCard.astro'
-import { projects } from '../data/projects'
+import ProjectsGrid from '../components/ProjectsGrid.astro'
+
+const token = import.meta.env.PUBLIC_GITHUB_TOKEN
 ---
 
 <BaseLayout
@@ -14,10 +15,6 @@ import { projects } from '../data/projects'
       A collection of things I've built — tools, experiments, and side projects.
     </p>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {projects.map((project) => (
-        <ProjectCard {...project} />
-      ))}
-    </div>
+    <ProjectsGrid token={token} />
   </section>
 </BaseLayout>

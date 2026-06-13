@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sombrechip88244.github.io/sitemap-index.xml

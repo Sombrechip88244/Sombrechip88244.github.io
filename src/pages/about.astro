@@ -1,5 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import { getCollection, render } from 'astro:content'
+
+const [about] = await getCollection('about')
+const { Content } = await render(about)
 ---
 
 <BaseLayout
@@ -8,73 +12,17 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 >
   <section class="max-w-2xl">
     <h1 class="text-2xl font-bold text-[var(--color-text)] mb-8">About</h1>
-
-    <!-- Bio -->
-    <div class="mb-10">
-      <p class="text-[var(--color-text-muted)] leading-relaxed mb-4">
-        I'm a software developer who cares about writing code that's clear, correct, and maintainable. I gravitate toward tooling, developer infrastructure, and anything that makes the craft of building software more pleasant.
-      </p>
-      <p class="text-[var(--color-text-muted)] leading-relaxed mb-4">
-        When I'm not coding, I'm usually reading about systems design, experimenting with new tools, or working on side projects that never quite ship.
-      </p>
-    </div>
-
-    <!-- Skills -->
-    <div class="mb-10">
-      <h2 class="text-lg font-semibold text-[var(--color-text)] mb-4">Skills</h2>
-      <div class="space-y-4">
-        <div>
-          <h3 class="text-sm font-medium text-[var(--color-text-muted)] mb-2 uppercase tracking-wide">Languages</h3>
-          <div class="flex flex-wrap gap-2">
-            {['TypeScript', 'JavaScript', 'Python', 'Go', 'SQL', 'Bash'].map((s) => <span class="tag">{s}</span>)}
-          </div>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-[var(--color-text-muted)] mb-2 uppercase tracking-wide">Frameworks & Runtimes</h3>
-          <div class="flex flex-wrap gap-2">
-            {['Node.js', 'Astro', 'React', 'Next.js', 'FastAPI', 'Express'].map((s) => <span class="tag">{s}</span>)}
-          </div>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-[var(--color-text-muted)] mb-2 uppercase tracking-wide">Tools & Infrastructure</h3>
-          <div class="flex flex-wrap gap-2">
-            {['Git', 'GitHub Actions', 'Docker', 'PostgreSQL', 'Redis', 'Linux'].map((s) => <span class="tag">{s}</span>)}
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Experience -->
-    <div class="mb-10">
-      <h2 class="text-lg font-semibold text-[var(--color-text)] mb-4">Experience</h2>
-      <div class="space-y-6">
-        <div>
-          <div class="flex items-baseline justify-between flex-wrap gap-1 mb-1">
-            <h3 class="font-medium text-[var(--color-text)]">Software Developer</h3>
-            <span class="text-sm text-[var(--color-text-muted)]">2022 — Present</span>
-          </div>
-          <p class="text-sm text-[var(--color-text-muted)]">Building internal tooling, APIs, and automation pipelines. Focused on developer experience and reliability.</p>
-        </div>
-        <div>
-          <div class="flex items-baseline justify-between flex-wrap gap-1 mb-1">
-            <h3 class="font-medium text-[var(--color-text)]">Junior Developer</h3>
-            <span class="text-sm text-[var(--color-text-muted)]">2020 — 2022</span>
-          </div>
-          <p class="text-sm text-[var(--color-text-muted)]">Full-stack web development. Shipped features on a SaaS product used by thousands of customers.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Education -->
-    <div>
-      <h2 class="text-lg font-semibold text-[var(--color-text)] mb-4">Education</h2>
-      <div>
-        <div class="flex items-baseline justify-between flex-wrap gap-1 mb-1">
-          <h3 class="font-medium text-[var(--color-text)]">B.S. Computer Science</h3>
-          <span class="text-sm text-[var(--color-text-muted)]">2016 — 2020</span>
-        </div>
-        <p class="text-sm text-[var(--color-text-muted)]">University of — focus on systems and software engineering.</p>
-      </div>
+    <div class="prose prose-sm sm:prose-base max-w-none
+      prose-headings:text-[var(--color-text)]
+      prose-p:text-[var(--color-text-muted)]
+      prose-a:text-[var(--color-accent)]
+      prose-a:no-underline hover:prose-a:underline
+      prose-code:text-[var(--color-accent)] prose-code:bg-[var(--color-surface)] prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
+      prose-pre:bg-[var(--color-surface)] prose-pre:border prose-pre:border-[var(--color-border)]
+      prose-li:text-[var(--color-text-muted)]
+      prose-hr:border-[var(--color-border)]
+    ">
+      <Content />
     </div>
   </section>
 </BaseLayout>
