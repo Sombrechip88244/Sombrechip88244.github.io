@@ -1,0 +1,81 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title: string
+  description?: string
+}
+
+const { title, description = 'Developer portfolio' } = Astro.props
+const siteUrl = 'https://sombrechip88244.github.io'
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- Nav -->
+    <header class="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]/80 backdrop-blur-sm">
+      <nav class="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
+        <a href="/" class="font-semibold text-[var(--color-text)] hover:text-[var(--color-accent)]">
+          Sombrechip
+        </a>
+        <!-- Desktop nav -->
+        <ul class="hidden sm:flex items-center gap-6 text-sm">
+          <li><a href="/projects" class="hover:text-[var(--color-accent)]">Projects</a></li>
+          <li><a href="/about" class="hover:text-[var(--color-accent)]">About</a></li>
+          <li><a href="/blog" class="hover:text-[var(--color-accent)]">Blog</a></li>
+          <li><a href="/contact" class="hover:text-[var(--color-accent)]">Contact</a></li>
+        </ul>
+        <!-- Mobile nav toggle (CSS only) -->
+        <label for="nav-toggle" class="sm:hidden cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </label>
+      </nav>
+      <!-- Mobile menu (CSS only via checkbox hack) -->
+      <input type="checkbox" id="nav-toggle" class="hidden" />
+      <div class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)] px-4 pb-4">
+        <ul class="flex flex-col gap-3 text-sm pt-3">
+          <li><a href="/projects" class="block hover:text-[var(--color-accent)]">Projects</a></li>
+          <li><a href="/about" class="block hover:text-[var(--color-accent)]">About</a></li>
+          <li><a href="/blog" class="block hover:text-[var(--color-accent)]">Blog</a></li>
+          <li><a href="/contact" class="block hover:text-[var(--color-accent)]">Contact</a></li>
+        </ul>
+      </div>
+      <style>
+        #nav-toggle:checked ~ div { display: flex; }
+      </style>
+    </header>
+
+    <!-- Main content -->
+    <main class="flex-1 max-w-4xl mx-auto px-4 py-12 w-full">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-[var(--color-border)] py-8 mt-auto">
+      <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[var(--color-text-muted)]">
+        <p>© {new Date().getFullYear()} Sombrechip. Built with Astro.</p>
+        <div class="flex items-center gap-4">
+          <a href="https://github.com/Sombrechip" class="hover:text-[var(--color-accent)]">GitHub</a>
+          <a href="/contact" class="hover:text-[var(--color-accent)]">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

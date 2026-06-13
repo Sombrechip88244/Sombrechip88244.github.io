@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { getCollection } from 'astro:content'
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+)
+
+function postUrl(id: string) {
+  return `/blog/${id.replace(/\.md$/, '')}`
+}
+---
+
+<BaseLayout
+  title="Blog — Sombrechip"
+  description="Writing on software development, tools, and side projects."
+>
+  <section>
+    <h1 class="text-2xl font-bold text-[var(--color-text)] mb-2">Blog</h1>
+    <p class="text-[var(--color-text-muted)] mb-8">
+      Thoughts on software, tools, and the craft of building things.
+    </p>
+
+    {posts.length === 0 ? (
+      <p class="text-[var(--color-text-muted)]">No posts yet — check back soon.</p>
+    ) : (
+      <ul class="flex flex-col gap-6">
+        {posts.map((post) => (
+          <li class="border-b border-[var(--color-border)] pb-6 last:border-0">
+            <article>
+              <div class="flex flex-wrap items-center gap-2 mb-2 text-xs text-[var(--color-text-muted)]">
+                <time datetime={post.data.date.toISOString()}>
+                  {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </time>
+                {post.data.tags?.map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+              <h2 class="text-lg font-semibold text-[var(--color-text)] mb-1">
+                <a href={postUrl(post.id)} class="hover:text-[var(--color-accent)]">
+                  {post.data.title}
+                </a>
+              </h2>
+              <p class="text-sm text-[var(--color-text-muted)]">{post.data.description}</p>
+              <a href={postUrl(post.id)} class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] mt-2 inline-block">
+                Read more →
+              </a>
+            </article>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</BaseLayout>

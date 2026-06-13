@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import ProjectCard from '../components/ProjectCard.astro'
+import { projects } from '../data/projects'
+---
+
+<BaseLayout
+  title="Projects — Sombrechip"
+  description="Open source projects and experiments by Sombrechip."
+>
+  <section>
+    <h1 class="text-2xl font-bold text-[var(--color-text)] mb-2">Projects</h1>
+    <p class="text-[var(--color-text-muted)] mb-8">
+      A collection of things I've built — tools, experiments, and side projects.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {projects.map((project) => (
+        <ProjectCard {...project} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

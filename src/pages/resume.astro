@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="Resume — Sombrechip"
+  description="Resume / CV for Sombrechip, software developer."
+>
+  <section class="max-w-2xl">
+    <div class="flex items-center justify-between mb-8">
+      <h1 class="text-2xl font-bold text-[var(--color-text)]">Resume</h1>
+      <!-- Placeholder: user adds their own PDF to public/resume.pdf -->
+      <a
+        href="/resume.pdf"
+        class="btn btn-outline text-sm"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download PDF
+      </a>
+    </div>
+
+    <!-- Summary -->
+    <section class="mb-8">
+      <h2 class="text-sm font-semibold uppercase tracking-wide text-[var(--color-text-muted)] mb-3">Summary</h2>
+      <p class="text-[var(--color-text-muted)]">
+        Software developer with experience building web applications, CLI tools, and backend systems. Focused on writing clean, maintainable code and improving developer workflows.
+      </p>
+    </section>
+
+    <!-- Experience -->
+    <section class="mb-8">
+      <h2 class="text-sm font-semibold uppercase tracking-wide text-[var(--color-text-muted)] mb-3">Experience</h2>
+      <div class="space-y-6">
+        <div>
+          <div class="flex items-baseline justify-between flex-wrap gap-1 mb-1">
+            <h3 class="font-semibold text-[var(--color-text)]">Software Developer</h3>
+            <span class="text-sm text-[var(--color-text-muted)]">2022 — Present</span>
+          </div>
+          <p class="text-sm text-[var(--color-accent)] mb-2">—</p>
+          <ul class="space-y-1 text-sm text-[var(--color-text-muted)] list-disc list-inside">
+            <li>Built and maintained internal tooling and APIs serving production workloads</li>
+            <li>Improved CI/CD pipelines, reducing deploy times by 40%</li>
+            <li>Led migration of a monolithic service to a modular architecture</li>
+            <li>Mentored junior developers and conducted code reviews</li>
+          </ul>
+        </div>
+        <div>
+          <div class="flex items-baseline justify-between flex-wrap gap-1 mb-1">
+            <h3 class="font-semibold text-[var(--color-text)]">Junior Developer</h3>
+            <span class="text-sm text-[var(--color-text-muted)]">2020 — 2022</span>
+          </div>
+          <p class="text-sm text-[var(--color-accent)] mb-2">—</p>
+          <ul class="space-y-1 text-sm text-[var(--color-text-muted)] list-disc list-inside">
+            <li>Developed full-stack features for a B2B SaaS product</li>
+            <li>Integrated third-party APIs and payment providers</li>
+            <li>Wrote automated tests, raising coverage from 45% to 80%</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="mb-8">
+      <h2 class="text-sm font-semibold uppercase tracking-wide text-[var(--color-text-muted)] mb-3">Technical Skills</h2>
+      <div class="space-y-2 text-sm text-[var(--color-text-muted)]">
+        <div><span class="font-medium text-[var(--color-text)]">Languages:</span> TypeScript, JavaScript, Python, Go, SQL, Bash</div>
+        <div><span class="font-medium text-[var(--color-text)]">Frameworks:</span> Node.js, Astro, React, Next.js, FastAPI, Express</div>
+        <div><span class="font-medium text-[var(--color-text)]">Tools:</span> Git, GitHub Actions, Docker, PostgreSQL, Redis, Linux, Vite</div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="mb-8">
+      <h2 class="text-sm font-semibold uppercase tracking-wide text-[var(--color-text-muted)] mb-3">Education</h2>
+      <div>
+        <div class="flex items-baseline justify-between flex-wrap gap-1 mb-1">
+          <h3 class="font-semibold text-[var(--color-text)]">B.S. Computer Science</h3>
+          <span class="text-sm text-[var(--color-text-muted)]">2016 — 2020</span>
+        </div>
+        <p class="text-sm text-[var(--color-text-muted)]">University of — focus on systems and software engineering</p>
+      </div>
+    </section>
+  </section>
+</BaseLayout>
