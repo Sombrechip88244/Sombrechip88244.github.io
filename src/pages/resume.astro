@@ -12,38 +12,25 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     <section class="mb-8">
       <h2 class="text-sm font-semibold uppercase tracking-wide text-[var(--color-text-muted)] mb-3">Summary</h2>
       <p class="text-[var(--color-text-muted)]">
-        Software developer with experience building web applications, CLI tools, and backend systems. Focused on writing clean, maintainable code and improving developer workflows.
+        Student developer building web apps and CLI tools in my spare time. Focused on learning and shipping small projects.
       </p>
     </section>
 
-    <!-- Experience -->
+    <!-- Projects -->
     <section class="mb-8">
-      <h2 class="text-sm font-semibold uppercase tracking-wide text-[var(--color-text-muted)] mb-3">Experience</h2>
-      <div class="space-y-6">
+      <h2 class="text-sm font-semibold uppercase tracking-wide text-[var(--color-text-muted)] mb-3">Projects</h2>
+      <div class="space-y-4 text-sm text-[var(--color-text-muted)]">
         <div>
-          <div class="flex items-baseline justify-between flex-wrap gap-1 mb-1">
-            <h3 class="font-semibold text-[var(--color-text)]">Software Developer</h3>
-            <span class="text-sm text-[var(--color-text-muted)]">2022 — Present</span>
-          </div>
-          <p class="text-sm text-[var(--color-accent)] mb-2">—</p>
-          <ul class="space-y-1 text-sm text-[var(--color-text-muted)] list-disc list-inside">
-            <li>Built and maintained internal tooling and APIs serving production workloads</li>
-            <li>Improved CI/CD pipelines, reducing deploy times by 40%</li>
-            <li>Led migration of a monolithic service to a modular architecture</li>
-            <li>Mentored junior developers and conducted code reviews</li>
-          </ul>
+          <h3 class="font-semibold text-[var(--color-text)]">DevToolkit</h3>
+          <p>A CLI toolkit for automating common development tasks — scaffolding, code generation, and deployment checks.</p>
         </div>
         <div>
-          <div class="flex items-baseline justify-between flex-wrap gap-1 mb-1">
-            <h3 class="font-semibold text-[var(--color-text)]">Junior Developer</h3>
-            <span class="text-sm text-[var(--color-text-muted)]">2020 — 2022</span>
-          </div>
-          <p class="text-sm text-[var(--color-accent)] mb-2">—</p>
-          <ul class="space-y-1 text-sm text-[var(--color-text-muted)] list-disc list-inside">
-            <li>Developed full-stack features for a B2B SaaS product</li>
-            <li>Integrated third-party APIs and payment providers</li>
-            <li>Wrote automated tests, raising coverage from 45% to 80%</li>
-          </ul>
+          <h3 class="font-semibold text-[var(--color-text)]">Portfolio Site</h3>
+          <p>This site — built with Astro and Tailwind CSS, deployed via GitHub Pages.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-[var(--color-text)]">DataPipeline</h3>
+          <p>Lightweight ETL pipeline for processing CSV and JSON datasets.</p>
         </div>
       </div>
     </section>
@@ -52,22 +39,9 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     <section class="mb-8">
       <h2 class="text-sm font-semibold uppercase tracking-wide text-[var(--color-text-muted)] mb-3">Technical Skills</h2>
       <div class="space-y-2 text-sm text-[var(--color-text-muted)]">
-        <div><span class="font-medium text-[var(--color-text)]">Languages:</span> TypeScript, JavaScript, Python, Go, SQL, Bash</div>
-        <div><span class="font-medium text-[var(--color-text)]">Frameworks:</span> Node.js, Astro, React, Next.js, FastAPI, Express</div>
-        <div><span class="font-medium text-[var(--color-text)]">Tools:</span> Git, GitHub Actions, Docker, PostgreSQL, Redis, Linux, Vite</div>
+        <div><span class="font-medium text-[var(--color-text)]">Languages:</span> TypeScript, JavaScript, Python, Bash</div>
+        <div><span class="font-medium text-[var(--color-text)]">Frameworks:</span> Node.js, Astro, Tailwind, Express</div>
+        <div><span class="font-medium text-[var(--color-text)]">Tools:</span> Git, GitHub Actions, Linux, Vite</div>
       </div>
     </section>
-
-    <!-- Education -->
-    <section class="mb-8">
-      <h2 class="text-sm font-semibold uppercase tracking-wide text-[var(--color-text-muted)] mb-3">Education</h2>
-      <div>
-        <div class="flex items-baseline justify-between flex-wrap gap-1 mb-1">
-          <h3 class="font-semibold text-[var(--color-text)]">B.S. Computer Science</h3>
-          <span class="text-sm text-[var(--color-text-muted)]">2016 — 2020</span>
-        </div>
-        <p class="text-sm text-[var(--color-text-muted)]">University of — focus on systems and software engineering</p>
-      </div>
-    </section>
-  </section>
 </BaseLayout>
