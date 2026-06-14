@@ -1,5 +1,6 @@
 ---
 import Analytics from '@vercel/analytics/astro'
+import SpeedInsights from '@vercel/speed-insights/astro'
 import '../styles/global.css'
 
 interface Props {
@@ -122,6 +123,6 @@ const siteUrl = 'https://sombrechip88244.github.io'
       .dark .theme-icon-light { display: none; }
       .dark .theme-icon-dark { display: inline; }
     </style>
+    <SpeedInsights />
     <Analytics />
-  </body>
 </html>
