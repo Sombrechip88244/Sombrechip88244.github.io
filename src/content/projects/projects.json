@@ -6,11 +6,21 @@
     "tags": ["Neovim", "Lua", "Linux"],
     "repo": "https://github.com/Sombrechip88244/tempura.nvim"
   },
+    
   {
     "title": "Portfolio Site",
     "description": "This site — built with Astro and Tailwind CSS, deployed via Vercel.",
     "url": "https://sombrechip88244-github-kc2ugsocn-oliver-fildes-projects.vercel.app/",
     "tags": ["Astro", "Tailwind", "TypeScript"],
     "repo": "https://github.com/Sombrechip/Sombrechip88244.github.io"
+  },
+
+  {
+    "title": "Go Link Shortener",
+    "description": "A link shortener built with Typescript, CSS and HTML hosted on cloudflare pages",
+    "url": "https://github.com/Sombrechip88244/go-link-shortener",
+    "tags": ["HTML", "CSS", "TypeScript"],
+    "repo": "https://github.com/Sombrechip88244/go-link-shortener"
   }
+
 ]
