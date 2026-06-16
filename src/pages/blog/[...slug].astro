@@ -44,6 +44,8 @@ const { Content } = await render(post)
     ">
       <Content />
     </div>
+    <!-- Counter.dev view counter -->
+    <script id="counter.dev" data-id="YOUR_COUNTER_ID" src="https://cdn.counter.dev/script.js"></script>
 
     <script type="application/ld+json" is:inline set:html={JSON.stringify({
       '@type': 'BlogPosting',
@@ -52,6 +54,9 @@ const { Content } = await render(post)
       datePublished: post.data.date.toISOString(),
       author: { '@type': 'Person', name: 'Olly' },
     })} />
+
+    <!-- Counter.dev view counter -->
+    <script id="counter.dev" data-id="YOUR_COUNTER_ID" src="https://cdn.counter.dev/script.js"></script>
 
     <div class="mt-12 pt-6 border-t border-[var(--color-border)]">
       <a href="/blog" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)]">
