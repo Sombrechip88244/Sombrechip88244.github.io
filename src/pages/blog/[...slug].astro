@@ -24,7 +24,8 @@ const { Content } = await render(post)
         <time datetime={post.data.date.toISOString()}>
           {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
         </time>
-        {post.data.tags?.map((tag) => (
+        <span>{Math.ceil(post.body.split(/\s+/).filter(Boolean).length / 200)} min read</span>
+        {post.data.tags?.map((tag: string) => (
           <span class="tag">{tag}</span>
         ))}
       </div>
