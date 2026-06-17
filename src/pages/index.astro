@@ -3,7 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import Hero from '../components/Hero.astro'
 import ProjectCard from '../components/ProjectCard.astro'
 import { getCollection, render } from 'astro:content'
-import { projects } from '../data/projects'
+
+const [entry] = await getCollection('projects')
+const projects = entry.data
 
 const [about] = await getCollection('about')
 const { Content: AboutContent } = await render(about)
@@ -33,7 +35,7 @@ const { Content: AboutContent } = await render(about)
   <section id="projects" class="max-w-4xl mx-auto px-4 py-12">
     <h2 class="text-xl font-bold text-[var(--color-text)] mb-6">Projects</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {projects.map((project) => (
+      {projects.map((project: { title: string; description: string; url: string; tags: string[]; repo?: string }) => (
         <ProjectCard {...project} />
       ))}
     </div>
