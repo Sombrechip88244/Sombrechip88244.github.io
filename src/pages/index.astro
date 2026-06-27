@@ -2,13 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import Hero from '../components/Hero.astro'
 import ProjectCard from '../components/ProjectCard.astro'
-import { getCollection, render } from 'astro:content'
+import Skills from '../components/Skills.astro'
+import { getCollection } from 'astro:content'
 
 const [entry] = await getCollection('projects')
 const projects = entry.data
-
-const [about] = await getCollection('about')
-const { Content: AboutContent } = await render(about)
 ---
 
 <BaseLayout title="Sombrechip — Developer Portfolio" description="Software developer portfolio. Projects, writing, and more.">
@@ -17,18 +15,7 @@ const { Content: AboutContent } = await render(about)
   <!-- About -->
   <section id="about" class="max-w-4xl mx-auto px-4 py-12">
     <h2 class="text-xl font-bold text-[var(--color-text)] mb-6">About</h2>
-    <div class="prose prose-sm sm:prose-base max-w-none
-      prose-headings:text-[var(--color-text)]
-      prose-p:text-[var(--color-text-muted)]
-      prose-a:text-[var(--color-accent)]
-      prose-a:no-underline hover:prose-a:underline
-      prose-code:text-[var(--color-accent)] prose-code:bg-[var(--color-surface)] prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
-      prose-pre:bg-[var(--color-surface)] prose-pre:border prose-pre:border-[var(--color-border)]
-      prose-li:text-[var(--color-text-muted)]
-      prose-hr:border-[var(--color-border)]
-    ">
-      <AboutContent />
-    </div>
+    <Skills />
   </section>
 
   <!-- Projects -->

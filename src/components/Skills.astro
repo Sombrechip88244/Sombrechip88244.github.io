@@ -1,0 +1,45 @@
+---
+const skills = {
+  Languages: [
+    { name: 'Python', icon: 'python' },
+    { name: 'Bash', icon: 'gnubash' },
+  ],
+  'Frameworks & Runtimes': [
+    { name: 'Node.js', icon: 'nodedotjs' },
+    { name: 'Astro', icon: 'astro' },
+    { name: 'Next.js', icon: 'nextdotjs' },
+  ],
+  'Tools & Infrastructure': [
+    { name: 'Git', icon: 'git' },
+    { name: 'macOS', icon: 'apple' },
+    { name: 'Docker', icon: 'docker' },
+    { name: 'Linux', icon: 'linux' },
+  ],
+}
+---
+
+<div class="space-y-6">
+  <p class="text-[var(--color-text-muted)]">
+    Im a student software developer i generally dabble in the open source community making various projects. In my free time I do lots of work with linux as i am quite interested in computers and love configuring and installing multiple linux distros.
+  </p>
+
+  {Object.entries(skills).map(([category, items]) => (
+    <div>
+      <h3 class="text-sm font-semibold text-[var(--color-text-muted)] uppercase tracking-wide mb-3">{category}</h3>
+      <div class="flex flex-wrap gap-3">
+        {items.map((skill) => (
+          <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--color-surface)] border border-[var(--color-border)] text-sm text-[var(--color-text)]">
+            <img
+              src={`https://cdn.simpleicons.org/${skill.icon}/0969da`}
+              alt={skill.name}
+              width="16"
+              height="16"
+              class="shrink-0"
+            />
+            <span>{skill.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
