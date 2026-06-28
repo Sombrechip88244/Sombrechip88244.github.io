@@ -6,7 +6,7 @@
     "tags": ["Neovim", "Lua", "Linux"],
     "repo": "https://github.com/Sombrechip88244/tempura.nvim"
   },
-    
+
   {
     "title": "Portfolio Site",
     "description": "This site — built with Astro and Tailwind CSS, deployed via Vercel.",
@@ -21,6 +21,14 @@
     "url": "https://github.com/Sombrechip88244/go-link-shortener",
     "tags": ["HTML", "CSS", "TypeScript"],
     "repo": "https://github.com/Sombrechip88244/go-link-shortener"
+  },
+
+  {
+    "title": "Apex Roofing Website",
+    "description": "A high-performance, single-page website concept designed specifically for local UK property maintenance contractors.",
+    "url": "https://apex-roofing-website-roan.vercel.app/",
+    "tags": ["HTML", "CSS", "React"],
+    "repo": "https://github.com/Sombrechip88244/apex-roofing-website"
   }
 
 ]
