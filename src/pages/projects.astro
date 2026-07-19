@@ -12,13 +12,17 @@ const projects = entry.data
   description="Open source projects and experiments by Oliver Fildes."
 >
   <section>
-    <h1 class="text-2xl font-bold text-[var(--color-text)] mb-2">Projects</h1>
-    <p class="text-[var(--color-text-muted)] mb-8">
+    <div class="flex items-center gap-4 mb-4">
+      <span class="w-8 h-[2px] bg-[var(--color-accent)] rounded-full"></span>
+      <h2 class="text-sm font-display font-semibold text-[var(--color-accent)] uppercase tracking-widest">All Projects</h2>
+    </div>
+    <h1 class="text-3xl sm:text-4xl font-display font-bold text-[var(--color-text)] mb-3 reveal">Projects</h1>
+    <p class="text-[var(--color-text-muted)] mb-10 text-lg max-w-xl reveal">
       A collection of things I've built — tools, experiments, and side projects.
     </p>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {projects.map((project: { title: string; description: string; url: string; tags: string[]; repo?: string }) => (
+      {projects.map((project) => (
         <ProjectCard {...project} />
       ))}
     </div>

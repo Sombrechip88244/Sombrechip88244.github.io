@@ -1,7 +1,9 @@
 ---
+import { ClientRouter } from 'astro:transitions'
 import Analytics from '@vercel/analytics/astro'
 import SpeedInsights from '@vercel/speed-insights/astro'
 import '../styles/global.css'
+import { getCollection } from 'astro:content'
 
 interface Props {
   title: string
@@ -10,6 +12,32 @@ interface Props {
 
 const { title, description = 'Developer portfolio' } = Astro.props
 const siteUrl = 'https://sombrechip88244.github.io'
+
+const blogPosts = await getCollection('blog')
+const [projectsEntry] = await getCollection('projects')
+const projects = projectsEntry?.data || []
+
+const cmdkData = {
+  pages: [
+    { title: 'Home', url: '/', icon: '⌂' },
+    { title: 'Projects', url: '/projects', icon: '⚡' },
+    { title: 'Blog', url: '/blog', icon: '✎' },
+    { title: 'About', url: '/about', icon: '◈' },
+    { title: 'Resume', url: '/resume', icon: '◉' },
+  ],
+  blog: blogPosts.map(p => ({
+    title: p.data.title,
+    url: `/blog/${p.id.replace(/\.md$/, '')}`,
+    date: p.data.date.toISOString(),
+    icon: '✎',
+  })),
+  projects: projects.map(p => ({
+    title: p.title,
+    url: p.url,
+    tags: p.tags,
+    icon: '⚡',
+  })),
+}
 ---
 
 <!doctype html>
@@ -25,62 +53,79 @@ const siteUrl = 'https://sombrechip88244.github.io'
     <meta property="og:url" content={siteUrl} />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <title>{title}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Anti-flash theme script -->
     <script is:inline>
       (function() {
         const t = localStorage.getItem('theme');
-        if (t === 'dark') document.documentElement.classList.add('dark');
+        if (t === 'light') document.documentElement.classList.add('light');
       })();
     </script>
+
+    <script type="application/json" id="cmdk-data" set:html={JSON.stringify(cmdkData)}></script>
+
+    <ClientRouter />
+
     <script src="https://cdn.counter.dev/script.js" data-id="f6c45461-03d7-48bc-b48f-a2f694edb918" data-utcoffset="1"></script>
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body class="min-h-screen flex flex-col relative">
+    <!-- Spotlight -->
+    <div id="spotlight" class="spotlight"></div>
+    <!-- Noise -->
+    <div class="noise-overlay"></div>
+
     <!-- Nav -->
-    <header class="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]/80 backdrop-blur-sm">
-      <nav class="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
-        <a href="/" class="font-semibold text-[var(--color-text)] hover:text-[var(--color-accent)]">
+    <header class="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]/70 backdrop-blur-md" transition:persist>
+      <nav class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+        <a href="/" class="font-display font-bold text-lg text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors">
           Olly
         </a>
         <!-- Desktop nav -->
-        <ul class="hidden sm:flex items-center gap-6 text-sm">
-          <li><a href="/#projects" class="hover:text-[var(--color-accent)]">Projects</a></li>
-          <li><a href="/#about" class="hover:text-[var(--color-accent)]">About</a></li>
-          <li><a href="/blog" class="hover:text-[var(--color-accent)]">Blog</a></li>
+        <ul class="hidden sm:flex items-center gap-8 text-sm font-medium">
+          <li><a href="/#projects" class="nav-link">Projects</a></li>
+          <li><a href="/#about" class="nav-link">About</a></li>
+          <li><a href="/blog" class="nav-link">Blog</a></li>
         </ul>
         <!-- Theme toggle -->
-        <button onclick="toggleTheme()" aria-label="Toggle theme" class="p-1.5 rounded hover:bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">
-          <span class="theme-icon-light">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        <div class="flex items-center gap-3">
+          <button onclick="toggleTheme()" aria-label="Toggle theme" class="p-2 rounded-lg hover:bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">
+            <span class="theme-icon-light">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            </span>
+            <span class="theme-icon-dark">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </svg>
+            </span>
+          </button>
+          <!-- Mobile nav toggle -->
+          <label for="nav-toggle" class="sm:hidden cursor-pointer text-[var(--color-text)]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
             </svg>
-          </span>
-          <span class="theme-icon-dark hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="5"/>
-              <line x1="12" y1="1" x2="12" y2="3"/>
-              <line x1="12" y1="21" x2="12" y2="23"/>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-              <line x1="1" y1="12" x2="3" y2="12"/>
-              <line x1="21" y1="12" x2="23" y2="12"/>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-            </svg>
-          </span>
-        </button>
-        <!-- Mobile nav toggle (CSS only) -->
-        <label for="nav-toggle" class="sm:hidden cursor-pointer">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="6" x2="21" y2="6" />
-            <line x1="3" y1="12" x2="21" y2="12" />
-            <line x1="3" y1="18" x2="21" y2="18" />
-          </svg>
-        </label>
+          </label>
+        </div>
       </nav>
-      <!-- Mobile menu (CSS only via checkbox hack) -->
+      <!-- Mobile menu -->
       <input type="checkbox" id="nav-toggle" class="hidden" />
       <div class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)] px-4 pb-4">
-        <ul class="flex flex-col gap-3 text-sm pt-3">
+        <ul class="flex flex-col gap-3 text-sm pt-3 font-medium">
           <li><a href="/#projects" class="block hover:text-[var(--color-accent)]">Projects</a></li>
           <li><a href="/#about" class="block hover:text-[var(--color-accent)]">About</a></li>
           <li><a href="/blog" class="block hover:text-[var(--color-accent)]">Blog</a></li>
@@ -92,35 +137,486 @@ const siteUrl = 'https://sombrechip88244.github.io'
     </header>
 
     <!-- Main content -->
-    <main class="flex-1 max-w-4xl mx-auto px-4 py-12 w-full">
+    <main class="flex-1 max-w-5xl mx-auto px-4 py-12 w-full">
       <slot />
     </main>
 
+    <!-- Command Palette -->
+    <div id="cmdk-overlay" class="cmdk-overlay"></div>
+    <div id="cmdk-palette" class="cmdk-modal">
+      <input id="cmdk-input" class="cmdk-input" type="text" placeholder="Search pages, posts, projects..." autocomplete="off" />
+      <div id="cmdk-list" class="cmdk-list"></div>
+    </div>
+
+    <!-- Page Transition Scramble Overlay -->
+    <div id="scramble-overlay" class="scramble-overlay">
+      <span id="scramble-text-line" class="scramble-text">READY</span>
+    </div>
+
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrix-canvas" class="matrix-canvas"></canvas>
+
     <!-- Footer -->
-    <footer class="border-t border-[var(--color-border)] py-8 mt-auto">
-      <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[var(--color-text-muted)]">
+    <footer class="border-t border-[var(--color-border)] py-10 mt-auto" transition:persist>
+      <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[var(--color-text-muted)]">
         <p>© {new Date().getFullYear()} Olly. Built with Astro.</p>
-        <div class="flex items-center gap-4">
-          <a href="https://github.com/Sombrechip" class="hover:text-[var(--color-accent)]">GitHub</a>
+        <div class="flex items-center gap-4 flex-wrap">
+          <a href="https://github.com/Sombrechip" class="hover:text-[var(--color-accent)] transition-colors">GitHub</a>
+          <a href="/rss.xml" class="hover:text-[var(--color-accent)] transition-colors">RSS</a>
+          <div id="github-widget" class="github-widget">
+            <span class="github-pulse"></span>
+            <span>Loading activity...</span>
+          </div>
         </div>
       </div>
     </footer>
 
-    <!-- Theme toggle script -->
-    <script>
-      function toggleTheme() {
-        document.documentElement.classList.toggle('dark');
-        localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-      }
-      // @ts-ignore - toggleTheme is called from inline onclick handler
-      window.toggleTheme = toggleTheme;
+    <!-- ═══════════════════════════════════════════
+         GLOBAL SCRIPTS
+         ═══════════════════════════════════════════ -->
+
+    <!-- Core: Spotlight, Tilt, Reveal, Theme -->
+    <script is:inline>
+      (function() {
+        var spotInit = false;
+        var revealObserver = null;
+
+        function initCore() {
+          // Spotlight — only once
+          if (!spotInit) {
+            document.addEventListener('mousemove', function(e) {
+              document.documentElement.style.setProperty('--x', e.clientX + 'px');
+              document.documentElement.style.setProperty('--y', e.clientY + 'px');
+              var sp = document.getElementById('spotlight');
+              if (sp) sp.style.opacity = '1';
+            });
+            spotInit = true;
+          }
+
+          // 3D Tilt cards — init any new cards on this page
+          document.querySelectorAll('[data-tilt]').forEach(function(card) {
+            if (card._tiltInit) return;
+            card._tiltInit = true;
+            card.addEventListener('mousemove', function(e) {
+              var rect = card.getBoundingClientRect();
+              var x = e.clientX - rect.left;
+              var y = e.clientY - rect.top;
+              var cx = rect.width / 2;
+              var cy = rect.height / 2;
+              var rx = ((y - cy) / cy) * -8;
+              var ry = ((x - cx) / cx) * 8;
+              card.style.transform = 'perspective(1000px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) scale3d(1.02,1.02,1.02)';
+              var glare = card.querySelector('.card-glare');
+              if (glare) {
+                glare.style.background = 'radial-gradient(circle at ' + x + 'px ' + y + 'px, rgba(255,255,255,0.12), transparent 80%)';
+                glare.style.opacity = '1';
+              }
+            });
+            card.addEventListener('mouseleave', function() {
+              card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1,1,1)';
+              var glare = card.querySelector('.card-glare');
+              if (glare) glare.style.opacity = '0';
+            });
+          });
+
+          // Scroll reveal — re-observe new elements on every page
+          if (revealObserver) revealObserver.disconnect();
+          revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+          document.querySelectorAll('.reveal').forEach(function(el) {
+            if (el._revealInit) return;
+            el._revealInit = true;
+            revealObserver.observe(el);
+          });
+        }
+
+        initCore();
+        document.addEventListener('astro:page-load', initCore);
+
+        // Theme toggle
+        function toggleTheme() {
+          document.documentElement.classList.toggle('light');
+          localStorage.setItem('theme', document.documentElement.classList.contains('light') ? 'light' : 'dark');
+        }
+        window.toggleTheme = toggleTheme;
+      })();
     </script>
-    <style>
-      .theme-icon-light { display: inline; }
-      .theme-icon-dark { display: none; }
-      .dark .theme-icon-light { display: none; }
-      .dark .theme-icon-dark { display: inline; }
+
+    <!-- Command Palette -->
+    <script is:inline>
+      (function() {
+        var palette, overlay, input, list;
+        var data = {};
+        var selectedIndex = 0;
+        var results = [];
+
+        function initCmdk() {
+          if (window._cmdkInit) return;
+          window._cmdkInit = true;
+
+          palette = document.getElementById('cmdk-palette');
+          overlay = document.getElementById('cmdk-overlay');
+          input = document.getElementById('cmdk-input');
+          list = document.getElementById('cmdk-list');
+
+          var dataEl = document.getElementById('cmdk-data');
+          if (dataEl) {
+            try { data = JSON.parse(dataEl.textContent); } catch(e) {}
+          }
+
+          document.addEventListener('keydown', onKeyDown);
+          if (overlay) overlay.addEventListener('click', close);
+          if (input) input.addEventListener('input', onInput);
+          document.addEventListener('astro:before-swap', close);
+        }
+
+        function onKeyDown(e) {
+          if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            toggle();
+            return;
+          }
+          if (!palette || !palette.classList.contains('open')) return;
+          if (e.key === 'Escape') { close(); return; }
+          if (e.key === 'ArrowDown') { e.preventDefault(); move(1); return; }
+          if (e.key === 'ArrowUp') { e.preventDefault(); move(-1); return; }
+          if (e.key === 'Enter') { e.preventDefault(); selectItem(); return; }
+        }
+
+        function toggle() {
+          if (!palette) return;
+          palette.classList.contains('open') ? close() : open();
+        }
+
+        function open() {
+          if (!palette || !overlay || !input) return;
+          palette.classList.add('open');
+          overlay.classList.add('open');
+          input.value = '';
+          input.focus();
+          render('');
+        }
+
+        function close() {
+          if (!palette || !overlay) return;
+          palette.classList.remove('open');
+          overlay.classList.remove('open');
+        }
+
+        function onInput() { render(input.value); }
+
+        function render(query) {
+          query = query.toLowerCase().trim();
+          results = [];
+          var sections = [];
+
+          var pageMatches = data.pages ? data.pages.filter(function(p) {
+            return !query || p.title.toLowerCase().indexOf(query) !== -1;
+          }) : [];
+          if (pageMatches.length) sections.push({ label: 'Pages', items: pageMatches });
+
+          var blogMatches = data.blog ? data.blog.filter(function(p) {
+            return !query || p.title.toLowerCase().indexOf(query) !== -1;
+          }) : [];
+          if (blogMatches.length) sections.push({ label: 'Blog', items: blogMatches.slice(0, 5) });
+
+          var projMatches = data.projects ? data.projects.filter(function(p) {
+            return !query || p.title.toLowerCase().indexOf(query) !== -1 ||
+              (p.tags && p.tags.some(function(t) { return t.toLowerCase().indexOf(query) !== -1; }));
+          }) : [];
+          if (projMatches.length) sections.push({ label: 'Projects', items: projMatches.slice(0, 5) });
+
+          selectedIndex = 0;
+
+          if (!sections.length) {
+            list.innerHTML = '<div class="cmdk-empty">No results found</div>';
+            return;
+          }
+
+          var html = '';
+          var globalIdx = 0;
+          sections.forEach(function(sec) {
+            html += '<div class="cmdk-group"><div class="cmdk-group-label">' + sec.label + '</div>';
+            sec.items.forEach(function(item) {
+              html += '<div class="cmdk-item" data-index="' + globalIdx + '" data-url="' + item.url + '" role="option">' +
+                '<span class="cmdk-item-icon">' + (item.icon || '→') + '</span>' +
+                '<span>' + escapeHtml(item.title) + '</span>' +
+                '<span class="cmdk-shortcut">↵</span>' +
+                '</div>';
+              globalIdx++;
+            });
+            html += '</div>';
+          });
+          list.innerHTML = html;
+
+          results = [];
+          sections.forEach(function(s) { results = results.concat(s.items); });
+          updateSelection();
+
+          list.querySelectorAll('.cmdk-item').forEach(function(el) {
+            el.addEventListener('click', function() {
+              var url = el.getAttribute('data-url');
+              if (url) window.location.href = url;
+            });
+            el.addEventListener('mouseenter', function() {
+              selectedIndex = parseInt(el.getAttribute('data-index'));
+              updateSelection();
+            });
+          });
+        }
+
+        function move(dir) {
+          if (!results.length) return;
+          selectedIndex = (selectedIndex + dir + results.length) % results.length;
+          updateSelection();
+        }
+
+        function updateSelection() {
+          var items = list.querySelectorAll('.cmdk-item');
+          items.forEach(function(el, i) {
+            el.setAttribute('aria-selected', i === selectedIndex ? 'true' : 'false');
+          });
+          var active = items[selectedIndex];
+          if (active) active.scrollIntoView({ block: 'nearest' });
+        }
+
+        function selectItem() {
+          if (results[selectedIndex]) {
+            window.location.href = results[selectedIndex].url;
+          }
+        }
+
+        function escapeHtml(text) {
+          var div = document.createElement('div');
+          div.textContent = text;
+          return div.innerHTML;
+        }
+
+        initCmdk();
+        document.addEventListener('astro:page-load', initCmdk);
+      })();
+    </script>
+
+    <!-- Page Transition Scramble -->
+    <script is:inline>
+      (function() {
+        var overlay, textEl, currentFrame;
+        var chars = '!<>-_\\/[]{}—=+*^?#________';
+
+        function initScramble() {
+          if (window._scrambleInit) return;
+          window._scrambleInit = true;
+          overlay = document.getElementById('scramble-overlay');
+          textEl = document.getElementById('scramble-text-line');
+          if (!overlay || !textEl) return;
+
+          document.addEventListener('astro:before-swap', function() {
+            overlay.classList.add('active');
+            scramble(textEl, 'INITIALIZING...', 600);
+          });
+
+          document.addEventListener('astro:page-load', function() {
+            if (!overlay.classList.contains('active')) return;
+            scramble(textEl, 'READY', 350, function() {
+              setTimeout(function() {
+                overlay.classList.remove('active');
+              }, 120);
+            });
+          });
+        }
+
+        function scramble(el, finalText, duration, done) {
+          if (currentFrame) cancelAnimationFrame(currentFrame);
+          var len = finalText.length;
+          var start = Date.now();
+          function update() {
+            var now = Date.now();
+            var progress = Math.min(1, (now - start) / duration);
+            var out = '';
+            for (var i = 0; i < len; i++) {
+              if (progress > (i + 1) / len) {
+                out += finalText[i];
+              } else {
+                out += chars[Math.floor(Math.random() * chars.length)];
+              }
+            }
+            el.textContent = out;
+            if (progress < 1) {
+              currentFrame = requestAnimationFrame(update);
+            } else {
+              el.textContent = finalText;
+              currentFrame = null;
+              if (done) done();
+            }
+          }
+          update();
+        }
+
+        initScramble();
+      })();
+    </script>
+
+    <!-- Konami Code + Matrix Rain -->
+    <script is:inline>
+      (function() {
+        var sequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+        var input = [];
+        var canvas, ctx, interval;
+        var drops = [];
+        var chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF';
+        var fontSize = 14;
+        var columns = 0;
+
+        function initMatrix() {
+          if (window._matrixInit) return;
+          window._matrixInit = true;
+          canvas = document.getElementById('matrix-canvas');
+          if (!canvas) return;
+          ctx = canvas.getContext('2d');
+          resize();
+          window.addEventListener('resize', resize);
+          document.addEventListener('keydown', onKey);
+        }
+
+        function resize() {
+          if (!canvas) return;
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          columns = Math.floor(canvas.width / fontSize);
+          drops = [];
+          for (var i = 0; i < columns; i++) drops[i] = Math.random() * -100;
+        }
+
+        function onKey(e) {
+          input.push(e.keyCode || e.which);
+          if (input.length > sequence.length) input.shift();
+
+          var match = input.length === sequence.length && sequence.every(function(v, i) { return v === input[i]; });
+          if (match) {
+            e.preventDefault();
+            toggleMatrix();
+            input = [];
+          }
+
+          if (e.key === 'Escape' && document.body.classList.contains('matrix-mode')) {
+            disableMatrix();
+          }
+        }
+
+        function toggleMatrix() {
+          if (document.body.classList.contains('matrix-mode')) disableMatrix();
+          else enableMatrix();
+        }
+
+        function enableMatrix() {
+          document.body.classList.add('matrix-mode');
+          if (canvas) canvas.classList.add('active');
+          if (interval) clearInterval(interval);
+          interval = setInterval(drawMatrix, 35);
+        }
+
+        function disableMatrix() {
+          document.body.classList.remove('matrix-mode');
+          if (canvas) canvas.classList.remove('active');
+          if (interval) clearInterval(interval);
+          interval = null;
+          if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function drawMatrix() {
+          if (!ctx || !canvas) return;
+          ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = '#00d4aa';
+          ctx.font = fontSize + 'px monospace';
+          for (var i = 0; i < drops.length; i++) {
+            var text = chars[Math.floor(Math.random() * chars.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+          }
+        }
+
+        initMatrix();
+        document.addEventListener('astro:page-load', function() {
+          if (document.body.classList.contains('matrix-mode') && !interval) {
+            enableMatrix();
+          }
+        });
+      })();
+    </script>
+
+    <!-- GitHub Live Commits Widget -->
+    <script is:inline>
+      (function() {
+        var widget, interval;
+
+        function initGitHub() {
+          widget = document.getElementById('github-widget');
+          if (!widget) return;
+          fetchEvents();
+          if (interval) clearInterval(interval);
+          interval = setInterval(fetchEvents, 60000);
+        }
+
+        function fetchEvents() {
+          fetch('https://api.github.com/users/Sombrechip88244/events/public?per_page=10')
+            .then(function(r) { return r.json(); })
+            .then(function(events) {
+              if (!Array.isArray(events)) throw new Error('Invalid response');
+              var push = events.find(function(e) { return e.type === 'PushEvent'; });
+              if (!push) {
+                widget.innerHTML = '<span class="github-pulse"></span><span>No recent pushes</span>';
+                return;
+              }
+              var repo = push.repo.name.replace('Sombrechip88244/', '');
+              var commits = push.payload && push.payload.commits;
+              var msg = commits && commits.length ? commits[commits.length - 1].message.split('\n')[0] : 'pushed code';
+              var time = timeAgo(new Date(push.created_at));
+              widget.innerHTML = '<span class="github-pulse"></span>' +
+                '<span>pushed to <strong>' + escapeHtml(repo) + '</strong>: ' + escapeHtml(msg.substring(0, 35)) + (msg.length > 35 ? '…' : '') + ' — ' + time + '</span>';
+            })
+            .catch(function() {
+              widget.innerHTML = '<span class="github-pulse"></span><span>GitHub activity unavailable</span>';
+            });
+        }
+
+        function timeAgo(date) {
+          var s = Math.floor((new Date() - date) / 1000);
+          if (s < 60) return 'just now';
+          var m = Math.floor(s / 60);
+          if (m < 60) return m + 'm ago';
+          var h = Math.floor(m / 60);
+          if (h < 24) return h + 'h ago';
+          var d = Math.floor(h / 24);
+          return d + 'd ago';
+        }
+
+        function escapeHtml(text) {
+          var div = document.createElement('div');
+          div.textContent = text;
+          return div.innerHTML;
+        }
+
+        initGitHub();
+        document.addEventListener('astro:page-load', initGitHub);
+      })();
+    </script>
+
+    <style is:inline>
+      .theme-icon-light { display: none; }
+      .theme-icon-dark { display: inline; }
+      .light .theme-icon-light { display: inline; }
+      .light .theme-icon-dark { display: none; }
     </style>
+
     <SpeedInsights />
     <Analytics />
+  </body>
 </html>

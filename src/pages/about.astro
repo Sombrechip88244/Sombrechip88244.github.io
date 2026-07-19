@@ -11,16 +11,21 @@ const { Content } = await render(about)
   description="Software developer focused on clean, reliable tools and systems."
 >
   <section class="max-w-2xl">
-    <h1 class="text-2xl font-bold text-[var(--color-text)] mb-8">About</h1>
-    <div class="prose prose-sm sm:prose-base max-w-none
-      prose-headings:text-[var(--color-text)]
+    <div class="flex items-center gap-4 mb-8 reveal">
+      <span class="w-8 h-[2px] bg-[var(--color-accent)] rounded-full"></span>
+      <span class="text-sm font-display font-semibold text-[var(--color-accent)] uppercase tracking-widest">About</span>
+    </div>
+    <h1 class="text-3xl sm:text-4xl font-display font-bold text-[var(--color-text)] mb-8 reveal">About</h1>
+    <div class="reveal prose prose-sm sm:prose-base max-w-none
+      prose-headings:text-[var(--color-text)] prose-headings:font-display
       prose-p:text-[var(--color-text-muted)]
       prose-a:text-[var(--color-accent)]
       prose-a:no-underline hover:prose-a:underline
-      prose-code:text-[var(--color-accent)] prose-code:bg-[var(--color-surface)] prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
-      prose-pre:bg-[var(--color-surface)] prose-pre:border prose-pre:border-[var(--color-border)]
+      prose-code:text-[var(--color-accent)] prose-code:bg-[var(--color-surface)] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
+      prose-pre:bg-[var(--color-surface)] prose-pre:border prose-pre:border-[var(--color-border)] prose-pre:rounded-xl
       prose-li:text-[var(--color-text-muted)]
       prose-hr:border-[var(--color-border)]
+      prose-strong:text-[var(--color-text)]
     ">
       <Content />
     </div>

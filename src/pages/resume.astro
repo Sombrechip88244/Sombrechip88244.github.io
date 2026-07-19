@@ -7,41 +7,56 @@ import BaseLayout from '../layouts/BaseLayout.astro'
   description="Resume / CV for Sombrechip, software developer."
 >
   <section class="max-w-2xl">
-    <h1 class="text-2xl font-bold text-[var(--color-text)]">Resume</h1>
+    <div class="flex items-center gap-4 mb-8 reveal">
+      <span class="w-8 h-[2px] bg-[var(--color-accent)] rounded-full"></span>
+      <span class="text-sm font-display font-semibold text-[var(--color-accent)] uppercase tracking-widest">Resume</span>
+    </div>
+    <h1 class="text-3xl sm:text-4xl font-display font-bold text-[var(--color-text)] mb-10 reveal">Resume</h1>
+
     <!-- Summary -->
-    <section class="mb-8">
-      <h2 class="text-sm font-semibold uppercase tracking-wide text-[var(--color-text-muted)] mb-3">Summary</h2>
-      <p class="text-[var(--color-text-muted)]">
+    <section class="mb-10 reveal">
+      <h2 class="text-sm font-display font-semibold uppercase tracking-wide text-[var(--color-accent)] mb-4">Summary</h2>
+      <p class="text-[var(--color-text-muted)] leading-relaxed">
         Student developer building web apps and CLI tools in my spare time. Focused on learning and shipping small projects.
       </p>
     </section>
 
     <!-- Projects -->
-    <section class="mb-8">
-      <h2 class="text-sm font-semibold uppercase tracking-wide text-[var(--color-text-muted)] mb-3">Projects</h2>
-      <div class="space-y-4 text-sm text-[var(--color-text-muted)]">
-        <div>
-          <h3 class="font-semibold text-[var(--color-text)]">DevToolkit</h3>
-          <p>A CLI toolkit for automating common development tasks — scaffolding, code generation, and deployment checks.</p>
+    <section class="mb-10 reveal">
+      <h2 class="text-sm font-display font-semibold uppercase tracking-wide text-[var(--color-accent)] mb-4">Projects</h2>
+      <div class="space-y-5">
+        <div class="card-3d p-5" data-tilt>
+          <div class="card-glare"></div>
+          <div class="relative z-10">
+            <h3 class="font-display font-semibold text-[var(--color-text)] mb-1">DevToolkit</h3>
+            <p class="text-sm text-[var(--color-text-muted)]">A CLI toolkit for automating common development tasks — scaffolding, code generation, and deployment checks.</p>
+          </div>
         </div>
-        <div>
-          <h3 class="font-semibold text-[var(--color-text)]">Portfolio Site</h3>
-          <p>This site — built with Astro and Tailwind CSS, deployed via GitHub Pages.</p>
+        <div class="card-3d p-5" data-tilt>
+          <div class="card-glare"></div>
+          <div class="relative z-10">
+            <h3 class="font-display font-semibold text-[var(--color-text)] mb-1">Portfolio Site</h3>
+            <p class="text-sm text-[var(--color-text-muted)]">This site — built with Astro and Tailwind CSS, deployed via GitHub Pages.</p>
+          </div>
         </div>
-        <div>
-          <h3 class="font-semibold text-[var(--color-text)]">DataPipeline</h3>
-          <p>Lightweight ETL pipeline for processing CSV and JSON datasets.</p>
+        <div class="card-3d p-5" data-tilt>
+          <div class="card-glare"></div>
+          <div class="relative z-10">
+            <h3 class="font-display font-semibold text-[var(--color-text)] mb-1">DataPipeline</h3>
+            <p class="text-sm text-[var(--color-text-muted)]">Lightweight ETL pipeline for processing CSV and JSON datasets.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Skills -->
-    <section class="mb-8">
-      <h2 class="text-sm font-semibold uppercase tracking-wide text-[var(--color-text-muted)] mb-3">Technical Skills</h2>
-      <div class="space-y-2 text-sm text-[var(--color-text-muted)]">
-        <div><span class="font-medium text-[var(--color-text)]">Languages:</span> TypeScript, JavaScript, Python, Bash</div>
-        <div><span class="font-medium text-[var(--color-text)]">Frameworks:</span> Node.js, Astro, Tailwind, Express</div>
-        <div><span class="font-medium text-[var(--color-text)]">Tools:</span> Git, GitHub Actions, Linux, Vite</div>
+    <section class="mb-10 reveal">
+      <h2 class="text-sm font-display font-semibold uppercase tracking-wide text-[var(--color-accent)] mb-4">Technical Skills</h2>
+      <div class="space-y-3 text-sm text-[var(--color-text-muted)]">
+        <div class="flex flex-wrap gap-2"><span class="font-medium text-[var(--color-text)]">Languages:</span> <span class="tag">TypeScript</span> <span class="tag">JavaScript</span> <span class="tag">Python</span> <span class="tag">Bash</span></div>
+        <div class="flex flex-wrap gap-2"><span class="font-medium text-[var(--color-text)]">Frameworks:</span> <span class="tag">Node.js</span> <span class="tag">Astro</span> <span class="tag">Tailwind</span> <span class="tag">Express</span></div>
+        <div class="flex flex-wrap gap-2"><span class="font-medium text-[var(--color-text)]">Tools:</span> <span class="tag">Git</span> <span class="tag">GitHub Actions</span> <span class="tag">Linux</span> <span class="tag">Vite</span></div>
       </div>
     </section>
+  </section>
 </BaseLayout>
