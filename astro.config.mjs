@@ -6,7 +6,7 @@ import remarkAlert from "remark-github-blockquote-alert";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://sombrechip88244.github.io",
+	site: "https://oliverfildes.com",
 	base: "/",
 	vite: {
 		plugins: [tailwindcss()],

@@ -17,7 +17,7 @@ export const projects: Project[] = [
   {
     title: 'Portfolio Site',
     description: 'This site — built with Astro and Tailwind CSS, deployed via GitHub Pages.',
-    url: 'https://sombrechip88244.github.io',
+    url: 'https://oliverfildes.com',
     tags: ['Astro', 'Tailwind', 'TypeScript'],
     repo: 'https://github.com/Sombrechip/Sombrechip88244.github.io',
   },

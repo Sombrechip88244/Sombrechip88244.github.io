@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { title, description = 'Developer portfolio' } = Astro.props
-const siteUrl = 'https://sombrechip88244.github.io'
+const siteUrl = 'https://oliverfildes.com'
 
 const blogPosts = await getCollection('blog')
 const [projectsEntry] = await getCollection('projects')
@@ -159,7 +159,7 @@ const cmdkData = {
     <!-- Footer -->
     <footer class="border-t border-[var(--color-border)] py-10 mt-auto" transition:persist>
       <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[var(--color-text-muted)]">
-        <p>© {new Date().getFullYear()} Olly. Built with Astro.</p>
+        <p>&copy; {new Date().getFullYear()} Olly. Built with Astro.</p>
         <div class="flex items-center gap-4 flex-wrap">
           <a href="https://github.com/Sombrechip" class="hover:text-[var(--color-accent)] transition-colors">GitHub</a>
           <a href="/rss.xml" class="hover:text-[var(--color-accent)] transition-colors">RSS</a>
